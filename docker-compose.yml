@@ -1,5 +1,6 @@
 version: "3.11"
 services:
+  # 1. First Container: Django
   app:
     build:
       context: .
@@ -10,3 +11,20 @@ services:
     volumes:
       - ./app:/app
     command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=youtube
+      - DB_USER=readyoun
+      - DB_PASS=robin_robin
+    depends_on:
+      - db
+
+  # 2. Second Container: PostgreSQL
+  db:
+    image: postgres:16
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=youtube
+      - POSTGRES_USER=readyoun
+      - POSTGRES_PASSWORD=robin_robin
