@@ -13,5 +13,3 @@ app/*/*/*/__pycahce__/
 .env
 .venv
 venv/
-
-data/db/base/
